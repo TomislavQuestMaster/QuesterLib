@@ -1,0 +1,14 @@
+<quest>
+    <nodes>
+        <node>
+            <id>1</id>
+            <latitude>0</latitude>
+            <longitude>0</longitude>
+        </node>
+        <node>
+            <id>2</id>
+            <latitude>0</latitude>
+            <longitude>0</longitude>
+        </node>
+    </nodes>
+</quest>
