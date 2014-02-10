@@ -1,28 +1,12 @@
 package net.thequester.model;
 
-import javax.xml.bind.annotation.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 /**
  * @author tdubravcevic
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "node")
-public class Node {
+public class QuestLocation {
 
-    private Integer id;
     private Double latitude;
     private Double longitude;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public Double getLatitude() {
         return latitude;
