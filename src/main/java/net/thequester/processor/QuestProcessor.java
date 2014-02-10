@@ -1,5 +1,6 @@
 package net.thequester.processor;
 
+import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
@@ -55,4 +56,15 @@ public class QuestProcessor {
 
     }
 
+    public Node gotoNext(Game game) {
+
+        for(Node child : getChildren(game.getCurrentNode())){
+
+            if(isNodeAtLocation(child,game.getCurrentLocation())){
+                return child;
+            }
+
+        }
+        return null;
+    }
 }
