@@ -10,7 +10,7 @@ import java.io.File;
 public class ZipManagerTest {
 
     @Test
-    public void test(){
+    public void test() throws ArchiverException {
         ZipManager zipManager = new ZipManager();
 
         File questFile = new File("src/test/resources/node.xml");

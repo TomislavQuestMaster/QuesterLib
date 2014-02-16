@@ -12,7 +12,7 @@ import java.util.zip.ZipOutputStream;
  */
 public class ZipManager {
 
-    public void zip(File file, String filename){
+    public void zip(File file, String filename) throws ArchiverException {
 
         byte[] buffer = new byte[1024];
 
@@ -20,25 +20,23 @@ public class ZipManager {
 
             FileOutputStream outputStream = new FileOutputStream(filename);
             ZipOutputStream zipOutputStream = new ZipOutputStream(outputStream);
-            ZipEntry zipEntry= new ZipEntry("node.xml");
+            ZipEntry zipEntry= new ZipEntry(file.getName());
             zipOutputStream.putNextEntry(zipEntry);
-            FileInputStream in = new FileInputStream(file);
 
-            int len;
-            while ((len = in.read(buffer)) > 0) {
-                zipOutputStream.write(buffer, 0, len);
+            FileInputStream inputStream = new FileInputStream(file);
+
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                zipOutputStream.write(buffer, 0, length);
             }
 
-            in.close();
+            inputStream.close();
             zipOutputStream.closeEntry();
 
-            //remember close it
             zipOutputStream.close();
 
-            System.out.println("Done");
-
         }catch(IOException ex){
-            ex.printStackTrace();
+            throw new ArchiverException("Error zipping file: " + ex.getMessage());
         }
     }
 }
