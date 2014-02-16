@@ -1,7 +1,7 @@
 package net.thequester.model;
 
 /**
- * Created by Tomo on 10.02.14..
+ * Created by Tomo.
  */
 public class Game {
 

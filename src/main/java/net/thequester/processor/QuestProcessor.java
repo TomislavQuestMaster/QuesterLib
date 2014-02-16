@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author tdubravcevic
  */
-public class QuestProcessor {
+public class QuestProcessor{
 
     private Quest quest;
 
