@@ -12,48 +12,47 @@ import java.util.List;
  */
 public class QuestProcessor {
 
-	private Quest quest;
+    private Quest quest;
 
-	public QuestProcessor(Quest quest) {
+    public QuestProcessor(Quest quest) {
+        this.quest = quest;
+    }
 
-		this.quest = quest;
-	}
+    /**
+     * @param node currently visited node
+     * @return list of nodes you can go to from the current
+     */
+    public List<Node> getChildren(Node node){
 
-	/**
-	 * @param node currently visited node
-	 * @return list of nodes you can go to from the current
-	 */
-	public List<Node> getChildren(Node node) {
+        List<Node> children = new ArrayList<Node>();
 
-		List<Node> children = new ArrayList<Node>();
+        for(Integer nodeId : quest.getConnections().get(node.getId()).getChildren()){
+             children.add(quest.getNodes().get(nodeId));
+        }
 
-		for (Integer nodeId : quest.getConnections().get(node.getId()).getChildren()) {
-			children.add(quest.getNodes().get(nodeId));
-		}
+        return children;
+    }
 
-		return children;
-	}
+    /**
+     * @param node currently visited node
+     * @return list of nodes from which you can visit the current node
+     */
+    public List<Node> getParents(Node node){
 
-	/**
-	 * @param node currently visited node
-	 * @return list of nodes from which you can visit the current node
-	 */
-	public List<Node> getParents(Node node) {
+        List<Node> parents = new ArrayList<Node>();
 
-		List<Node> parents = new ArrayList<Node>();
+        for(Integer nodeId : quest.getConnections().get(node.getId()).getParents()){
+            parents.add(quest.getNodes().get(nodeId));
+        }
 
-		for (Integer nodeId : quest.getConnections().get(node.getId()).getParents()) {
-			parents.add(quest.getNodes().get(nodeId));
-		}
+        return parents;
+    }
 
-		return parents;
-	}
 
-	public boolean isNodeAtLocation(Node node, QuestLocation location) {
+    public boolean isNodeAtLocation(Node node, QuestLocation location){
 
-		double distance = distanceInMeters(new QuestLocation(node.getLatitude(), node.getLongitude()), location);
+         return false;
 
-        return distance < node.getRadius();
     }
 
 	private double distanceInMeters(QuestLocation to, QuestLocation from) {
@@ -72,4 +71,15 @@ public class QuestProcessor {
 
 		return 6366000 * tt;
 	}
+    public Node gotoNext(Game game) {
+
+        for(Node child : getChildren(game.getCurrentNode())){
+
+            if(isNodeAtLocation(child,game.getCurrentLocation())){
+                return child;
+            }
+
+        }
+        return null;
+    }
 }
