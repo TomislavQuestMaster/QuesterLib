@@ -13,8 +13,7 @@ import java.util.Map;
 public class Node {
 
     private Integer id;
-    private Double latitude;
-    private Double longitude;
+    private QuestLocation questLocation;
     private Double radius;
 
     public Integer getId() {
@@ -25,20 +24,12 @@ public class Node {
         this.id = id;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public QuestLocation getQuestLocation() {
+        return questLocation;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setQuestLocation(QuestLocation questLocation) {
+        this.questLocation = questLocation;
     }
 
     public Double getRadius() {

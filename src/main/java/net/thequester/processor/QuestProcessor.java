@@ -52,8 +52,7 @@ public class QuestProcessor {
 
     public boolean isNodeAtLocation(Node node, QuestLocation location){
 
-         return false;
-
+        return distanceInMeters(node.getQuestLocation(), location) <= node.getRadius();
     }
 
 	private double distanceInMeters(QuestLocation to, QuestLocation from) {
@@ -72,6 +71,7 @@ public class QuestProcessor {
 
 		return 6366000 * tt;
 	}
+
     public Node gotoNext(Game game) {
 
         for(Node child : getChildren(game.getCurrentNode())){
@@ -83,4 +83,6 @@ public class QuestProcessor {
         }
         return null;
     }
+
+
 }
