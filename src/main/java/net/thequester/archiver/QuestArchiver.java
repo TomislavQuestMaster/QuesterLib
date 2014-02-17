@@ -1,11 +1,13 @@
 package net.thequester.archiver;
 
 import net.thequester.model.Quest;
+import net.thequester.model.QuestArchive;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,39 +16,63 @@ import java.util.List;
  */
 public class QuestArchiver implements IQuestArchiver {
 
-    private List<Quest> quests;
+	private QuestArchive archive;
 
-    public QuestArchiver() {
-        quests = new ArrayList<Quest>();
-    }
+	public QuestArchiver(QuestArchive archive) {
 
-    public void loadAll(String directoryLocation) throws ArchiverException {
+		this.archive = archive;
+	}
 
-        File directory = new File(directoryLocation);
+	@Override
+	public List<String> fetchAll() {
 
-        for (File questFile : directory.listFiles()) {
-            quests.add(load(questFile));
+		List<String> result = new ArrayList<String>();
+
+		File directory = new File(archive.getLocation());
+
+		for (File questFile : directory.listFiles()) {
+			result.add(questFile.getName());
+		}
+
+		return result;
+	}
+
+	@Override
+	public Quest load(String questName) throws ArchiverException {
+
+		File questArchive = new File(archive.getLocation() + "/" + questName);
+		if (!questArchive.isDirectory()) {
+			throw new ArchiverException("Not a valid quest archive");
+		}
+
+        for(File archiveElement : questArchive.listFiles()){
+            if(archiveElement.getName().equals("quest.xml")){
+                return getQuestFromArchive(archiveElement);
+            }
         }
+
+        throw new ArchiverException("No quest descriptor in archive");
     }
 
-
-    @Override
-    public Quest load(File file) throws ArchiverException {
+    private Quest getQuestFromArchive(File file) throws ArchiverException {
 
         try {
-
             JAXBContext context = JAXBContext.newInstance(Quest.class);
             Unmarshaller unmarshaller = context.createUnmarshaller();
-            //File file = new File(Paths.get(fileName).toUri());
-            return (Quest)unmarshaller.unmarshal(file);
+            return (Quest) unmarshaller.unmarshal(file);
 
         } catch (JAXBException e) {
             throw new ArchiverException("Failed to load quest: " + e.getMessage());
         }
-
     }
 
-    public List<Quest> getQuests() {
-        return quests;
+    public void addNewArchive(File zippedQuest) throws ArchiverException {
+
+        ZipManager zipManager = new ZipManager();
+
+        File questDir = zipManager.unzip(zippedQuest);
+        zipManager.delete(zippedQuest);
+
+        archive.getQuests().add(load(questDir.getName()));
     }
 }
