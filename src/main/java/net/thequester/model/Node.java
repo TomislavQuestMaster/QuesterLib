@@ -15,6 +15,7 @@ public class Node {
     private Integer id;
     private Double latitude;
     private Double longitude;
+    private Double radius;
 
     public Integer getId() {
         return id;
@@ -38,5 +39,13 @@ public class Node {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    public Double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(Double radius) {
+        this.radius = radius;
     }
 }
