@@ -60,8 +60,7 @@ public class ModelTest {
 
         Node node = new Node();
         node.setId(1);
-        node.setLatitude(0.0);
-        node.setLongitude(0.0);
+        node.setQuestLocation(new QuestLocation(0.0,0.0));
 
         Map<Integer,Connection> map = new HashMap<Integer, Connection>();
         List<Integer> list = new ArrayList<Integer>();

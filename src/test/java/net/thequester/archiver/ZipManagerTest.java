@@ -1,5 +1,6 @@
 package net.thequester.archiver;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -9,6 +10,7 @@ import java.io.File;
  */
 public class ZipManagerTest {
 
+    @Ignore
     @Test
     public void zippingFile() throws ArchiverException {
         ZipManager zipManager = new ZipManager();
@@ -20,6 +22,7 @@ public class ZipManagerTest {
 
     }
 
+    @Ignore
     @Test
     public void zippingDirectory() throws ArchiverException {
         ZipManager zipManager = new ZipManager();
@@ -31,7 +34,7 @@ public class ZipManagerTest {
 
     }
 
-
+    @Ignore
     @Test
     public void deleteTest() throws ArchiverException {
         ZipManager zipManager = new ZipManager();
@@ -43,6 +46,7 @@ public class ZipManagerTest {
     }
 
 
+    @Ignore
     @Test
     public void unzippingDirectory() throws ArchiverException {
         ZipManager zipManager = new ZipManager();

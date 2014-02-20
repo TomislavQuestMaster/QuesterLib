@@ -4,6 +4,7 @@ import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -21,6 +22,7 @@ public class QuestProcessorTest {
         questProcessor = new QuestProcessor(quest);
     }
 
+    @Ignore
     @Test
     public void test(){
 
