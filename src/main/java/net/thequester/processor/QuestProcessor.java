@@ -57,19 +57,17 @@ public class QuestProcessor {
 
 	private double distanceInMeters(QuestLocation to, QuestLocation from) {
 
-		double pk = 180 / 3.14169;
+        double pk = 180 / Math.PI;
 
-		double a1 = to.getLatitude() / pk;
-		double a2 = to.getLongitude() / pk;
-		double b1 = from.getLatitude() / pk;
-		double b2 = from.getLongitude() / pk;
+        double a1 = to.getLatitude() * Math.PI / 180;
+        double a2 = to.getLongitude() * Math.PI / 180;
+        double b1 = from.getLatitude() * Math.PI / 180;
+        double b2 = from.getLongitude() * Math.PI / 180;
 
-		double t1 = Math.cos(a1) * Math.cos(a2) * Math.cos(b1) * Math.cos(b2);
-		double t2 = Math.cos(a1) * Math.sin(a2) * Math.cos(b1) * Math.sin(b2);
-		double t3 = Math.sin(a1) * Math.sin(b1);
-		double tt = Math.acos(t1 + t2 + t3);
+        double t = Math.sin(a1)*Math.sin(b1) + Math.cos(a1)*Math.cos(b1)*Math.cos(a2 - b2);
+        double tt = Math.acos(t);
 
-		return 6366000 * tt;
+        return 6366000 * tt;
 	}
 
     public Node gotoNext(Game game) {
