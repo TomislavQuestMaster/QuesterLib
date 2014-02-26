@@ -11,13 +11,30 @@ import java.util.List;
 /**
  * @author tdubravcevic
  */
-public class QuestProcessor {
+public class QuestProcessor implements IQuestProcessor{
 
     private Quest quest;
+	private Game game;
 
     public QuestProcessor(Quest quest) {
         this.quest = quest;
+		this.game = new Game();
+		game.setCurrentNode(quest.getNodes().get(0));
     }
+
+	@Override
+	public Node processLocation(QuestLocation location) {
+
+		for(Node node : getChildren(game.getCurrentNode())){
+
+			if(isNodeAtLocation(node, location)){
+				game.setCurrentNode(node);
+				return node;
+			}
+		}
+
+		return null;
+	}
 
     /**
      * @param node currently visited node
@@ -49,7 +66,6 @@ public class QuestProcessor {
         return parents;
     }
 
-
     public boolean isNodeAtLocation(Node node, QuestLocation location){
 
         return distanceInMeters(node.getQuestLocation(), location) <= node.getRadius();
@@ -69,18 +85,5 @@ public class QuestProcessor {
 
         return 6366000 * tt;
 	}
-
-    public Node gotoNext(Game game) {
-
-        for(Node child : getChildren(game.getCurrentNode())){
-
-            if(isNodeAtLocation(child,game.getCurrentLocation())){
-                return child;
-            }
-
-        }
-        return null;
-    }
-
 
 }
