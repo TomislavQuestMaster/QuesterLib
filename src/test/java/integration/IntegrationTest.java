@@ -11,11 +11,7 @@ import net.thequester.processor.QuestProcessor;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
-import java.nio.file.Paths;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -33,12 +29,12 @@ public class IntegrationTest {
 	@Before
 	public void setUp() throws JAXBException, ArchiverException {
 
-		questArchiver = new QuestArchiver(new QuestArchive("src/test/resources/quests"));
+		QuestArchive archive = new QuestArchive("src/test/resources/quests");
+		questArchiver = new QuestArchiver(archive);
 		Quest quest = questArchiver.load("quest1");
-		processor = new QuestProcessor(quest);
+		processor = new QuestProcessor(quest, archive);
 
 		expectedPath = new LinkedHashMap<QuestLocation, Node>();
-		expectedPath.put(new QuestLocation(0.0,0.0), quest.getNodes().get(0));
 		expectedPath.put(new QuestLocation(1.0,1.0), quest.getNodes().get(1));
 		expectedPath.put(new QuestLocation(1.0,1.0), null);
 		expectedPath.put(new QuestLocation(3.0,3.0), quest.getNodes().get(3));
@@ -53,6 +49,6 @@ public class IntegrationTest {
 			assertEquals(expectedPath.get(location), node);
 		}
 
-		questArchiver.saveProgress("quest1", processor.getGame());
+		//questArchiver.saveProgress("quest1", processor.getGame());
 	}
 }

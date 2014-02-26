@@ -30,7 +30,7 @@ public class QuestProcessorTest {
 		File file = new File(Paths.get("src/test/resources/quests/quest1/quest.xml").toUri());
 		quest = (Quest)unmarshaller.unmarshal(file);
 
-        questProcessor = new QuestProcessor(quest);
+        questProcessor = new QuestProcessor(quest, null);
     }
 
     @Test

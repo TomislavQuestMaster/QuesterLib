@@ -17,7 +17,7 @@ public class GameProcessor {
 
     public void startQuest(Quest quest){
 
-        questProcessor = new QuestProcessor(quest);
+        questProcessor = new QuestProcessor(quest, null);
         game = new Game();
         //TODO who loads the game
     }

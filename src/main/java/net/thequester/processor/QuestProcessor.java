@@ -1,9 +1,8 @@
 package net.thequester.processor;
 
-import net.thequester.model.Game;
-import net.thequester.model.Node;
-import net.thequester.model.Quest;
-import net.thequester.model.QuestLocation;
+import net.thequester.archiver.ArchiverException;
+import net.thequester.archiver.QuestArchiver;
+import net.thequester.model.*;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -17,11 +16,16 @@ public class QuestProcessor implements IQuestProcessor{
     private Quest quest;
 	private Game game;
 
-    public QuestProcessor(Quest quest) {
+    public QuestProcessor(Quest quest, QuestArchive archive) {
         this.quest = quest;
-		this.game = new Game(); //TODO get game for quest
-		game.setVisitedNodes(new LinkedList<Node>());
-    }
+		QuestArchiver archiver = new QuestArchiver(archive);
+		try {
+			this.game = archiver.loadGame("quest1");
+		} catch (ArchiverException e) {
+			this.game = new Game();
+			this.game.setVisitedNodes(new LinkedList<Node>());
+		}
+	}
 
 	@Override
 	public Node processLocation(QuestLocation location) {

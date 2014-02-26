@@ -9,7 +9,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +55,23 @@ public class QuestArchiver implements IQuestArchiver {
         throw new ArchiverException("No quest descriptor in archive");
     }
 
+	@Override
+	public Game loadGame(String questName) throws ArchiverException {
+
+		File questArchive = new File(archive.getLocation() + "/" + questName);
+		if (!questArchive.isDirectory()) {
+			throw new ArchiverException("Not a valid quest archive");
+		}
+
+		for(File archiveElement : questArchive.listFiles()){
+			if(archiveElement.getName().equals("game.xml")){
+				return getGameFromArchive(archiveElement);
+			}
+		}
+
+		throw new ArchiverException("No quest descriptor in archive");
+	}
+
     private Quest getQuestFromArchive(File file) throws ArchiverException {
 
         try {
@@ -67,6 +83,18 @@ public class QuestArchiver implements IQuestArchiver {
             throw new ArchiverException("Failed to load quest: " + e.getMessage());
         }
     }
+
+	private Game getGameFromArchive(File file) throws ArchiverException {
+
+		try {
+			JAXBContext context = JAXBContext.newInstance(Game.class);
+			Unmarshaller unmarshaller = context.createUnmarshaller();
+			return (Game) unmarshaller.unmarshal(file);
+
+		} catch (JAXBException e) {
+			throw new ArchiverException("Failed to load game: " + e.getMessage());
+		}
+	}
 
     public void addNewArchive(File zippedQuest) throws ArchiverException {
 
