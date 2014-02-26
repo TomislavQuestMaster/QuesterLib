@@ -28,11 +28,12 @@ public class IntegrationTest {
 
 	private IQuestProcessor processor;
 	private Map<QuestLocation, Node> expectedPath;
+	private QuestArchiver questArchiver;
 
 	@Before
 	public void setUp() throws JAXBException, ArchiverException {
 
-		QuestArchiver questArchiver = new QuestArchiver(new QuestArchive("src/test/resources/quests"));
+		questArchiver = new QuestArchiver(new QuestArchive("src/test/resources/quests"));
 		Quest quest = questArchiver.load("quest1");
 		processor = new QuestProcessor(quest);
 
@@ -44,12 +45,14 @@ public class IntegrationTest {
 	}
 
 	@Test
-	public void runQuest(){
+	public void runQuest() throws ArchiverException {
 
 		for(QuestLocation location : expectedPath.keySet()){
 
 			Node node = processor.processLocation(location);
 			assertEquals(expectedPath.get(location), node);
 		}
+
+		questArchiver.saveProgress("quest1", processor.getGame());
 	}
 }

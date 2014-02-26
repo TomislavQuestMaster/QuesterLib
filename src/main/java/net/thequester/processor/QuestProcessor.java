@@ -6,6 +6,7 @@ import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -19,6 +20,7 @@ public class QuestProcessor implements IQuestProcessor{
     public QuestProcessor(Quest quest) {
         this.quest = quest;
 		this.game = new Game(); //TODO get game for quest
+		game.setVisitedNodes(new LinkedList<Node>());
     }
 
 	@Override
@@ -28,6 +30,7 @@ public class QuestProcessor implements IQuestProcessor{
 
 			if(isNodeAtLocation(node, location)){
 				game.setCurrentNode(node);
+				game.getVisitedNodes().add(node);
 				return node;
 			}
 		}
@@ -59,6 +62,11 @@ public class QuestProcessor implements IQuestProcessor{
         return parents;
     }
 
+	@Override
+	public Game getGame() {
+
+		return game;
+	}
 
 	private List<Node> getVisitableLocations(Node node){
 

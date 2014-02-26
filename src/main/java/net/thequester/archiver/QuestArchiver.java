@@ -1,10 +1,12 @@
 package net.thequester.archiver;
 
+import net.thequester.model.Game;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestArchive;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.nio.file.Paths;
@@ -75,4 +77,17 @@ public class QuestArchiver implements IQuestArchiver {
 
         archive.getQuests().add(load(questDir.getName()));
     }
+
+	public void saveProgress(String questName, Game game) throws ArchiverException {
+
+		File gameFile = new File(archive.getLocation() + "/" + questName + "/game.xml");
+
+		try {
+			JAXBContext jaxbContextMessage = JAXBContext.newInstance(Game.class);
+			Marshaller marshaller = jaxbContextMessage.createMarshaller();
+			marshaller.marshal(game, gameFile);
+		} catch (JAXBException e) {
+			throw new ArchiverException("Failed to save game progress: " +  e.getMessage());
+		}
+	}
 }

@@ -1,5 +1,6 @@
 package net.thequester.processor;
 
+import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.QuestLocation;
 
@@ -28,4 +29,6 @@ public interface IQuestProcessor {
 	 * @return list of nodes from which you can visit the current node
 	 */
 	List<Node> getParents(Node node);
+
+	Game getGame();
 }

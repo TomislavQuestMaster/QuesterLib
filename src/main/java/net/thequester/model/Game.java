@@ -1,30 +1,27 @@
 package net.thequester.model;
 
+import javax.xml.bind.annotation.*;
 import java.util.List;
 
 /**
  * Created by Tomo.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "game")
 public class Game {
 
     private Node currentNode;
-    private QuestLocation currentLocation;
+
+	@XmlElementWrapper(name = "visitedNodes")
+	@XmlElement(name = "node", type = Node.class)
     private List<Node> visitedNodes;
 
     public Node getCurrentNode() {
         return currentNode;
     }
 
-    public QuestLocation getCurrentLocation() {
-        return currentLocation;
-    }
-
     public void setCurrentNode(Node currentNode) {
         this.currentNode = currentNode;
-    }
-
-    public void setCurrentLocation(QuestLocation currentLocation) {
-        this.currentLocation = currentLocation;
     }
 
     public List<Node> getVisitedNodes() {
