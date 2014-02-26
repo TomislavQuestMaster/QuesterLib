@@ -1,7 +1,10 @@
 package integration;
 
+import net.thequester.archiver.ArchiverException;
+import net.thequester.archiver.QuestArchiver;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
+import net.thequester.model.QuestArchive;
 import net.thequester.model.QuestLocation;
 import net.thequester.processor.IQuestProcessor;
 import net.thequester.processor.QuestProcessor;
@@ -27,12 +30,10 @@ public class IntegrationTest {
 	private Map<QuestLocation, Node> expectedPath;
 
 	@Before
-	public void setUp() throws JAXBException {
+	public void setUp() throws JAXBException, ArchiverException {
 
-		JAXBContext jaxbContextMessage = JAXBContext.newInstance(Quest.class);
-		Unmarshaller unmarshaller = jaxbContextMessage.createUnmarshaller();
-		File file = new File(Paths.get("src/test/resources/quests/quest1/quest.xml").toUri());
-		Quest quest = (Quest)unmarshaller.unmarshal(file);
+		QuestArchiver questArchiver = new QuestArchiver(new QuestArchive("src/test/resources/quests"));
+		Quest quest = questArchiver.load("quest1");
 		processor = new QuestProcessor(quest);
 
 		expectedPath = new LinkedHashMap<QuestLocation, Node>();

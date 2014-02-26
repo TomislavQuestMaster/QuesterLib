@@ -61,7 +61,7 @@ public class QuestProcessor implements IQuestProcessor{
     }
 
 
-    private boolean isNodeAtLocation(Node node, QuestLocation location){
+    boolean isNodeAtLocation(Node node, QuestLocation location){
 
         return distanceInMeters(node.getQuestLocation(), location) <= node.getRadius();
     }
