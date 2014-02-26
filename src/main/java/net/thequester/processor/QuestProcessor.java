@@ -18,7 +18,7 @@ public class QuestProcessor implements IQuestProcessor{
 
     public QuestProcessor(Quest quest) {
         this.quest = quest;
-		this.game = new Game();
+		this.game = new Game(); //TODO get game for quest
 		game.setCurrentNode(quest.getNodes().get(0));
     }
 
@@ -36,10 +36,7 @@ public class QuestProcessor implements IQuestProcessor{
 		return null;
 	}
 
-    /**
-     * @param node currently visited node
-     * @return list of nodes you can go to from the current
-     */
+    @Override
     public List<Node> getChildren(Node node){
 
         List<Node> children = new ArrayList<Node>();
@@ -51,10 +48,7 @@ public class QuestProcessor implements IQuestProcessor{
         return children;
     }
 
-    /**
-     * @param node currently visited node
-     * @return list of nodes from which you can visit the current node
-     */
+    @Override
     public List<Node> getParents(Node node){
 
         List<Node> parents = new ArrayList<Node>();
@@ -66,7 +60,8 @@ public class QuestProcessor implements IQuestProcessor{
         return parents;
     }
 
-    public boolean isNodeAtLocation(Node node, QuestLocation location){
+
+    private boolean isNodeAtLocation(Node node, QuestLocation location){
 
         return distanceInMeters(node.getQuestLocation(), location) <= node.getRadius();
     }
