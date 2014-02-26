@@ -19,13 +19,12 @@ public class QuestProcessor implements IQuestProcessor{
     public QuestProcessor(Quest quest) {
         this.quest = quest;
 		this.game = new Game(); //TODO get game for quest
-		game.setCurrentNode(quest.getNodes().get(0));
     }
 
 	@Override
 	public Node processLocation(QuestLocation location) {
 
-		for(Node node : getChildren(game.getCurrentNode())){
+		for(Node node : getVisitableLocations(game.getCurrentNode())){
 
 			if(isNodeAtLocation(node, location)){
 				game.setCurrentNode(node);
@@ -60,6 +59,17 @@ public class QuestProcessor implements IQuestProcessor{
         return parents;
     }
 
+
+	private List<Node> getVisitableLocations(Node node){
+
+		if(node == null){
+			List<Node> nodes = new ArrayList<Node>();
+			nodes.add(quest.getNodes().get(0));
+			return nodes;
+		}
+
+		return getChildren(node);
+	}
 
     boolean isNodeAtLocation(Node node, QuestLocation location){
 

@@ -37,6 +37,7 @@ public class IntegrationTest {
 		processor = new QuestProcessor(quest);
 
 		expectedPath = new LinkedHashMap<QuestLocation, Node>();
+		expectedPath.put(new QuestLocation(0.0,0.0), quest.getNodes().get(0));
 		expectedPath.put(new QuestLocation(1.0,1.0), quest.getNodes().get(1));
 		expectedPath.put(new QuestLocation(1.0,1.0), null);
 		expectedPath.put(new QuestLocation(3.0,3.0), quest.getNodes().get(3));
