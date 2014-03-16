@@ -3,6 +3,11 @@ package net.thequester.processor;
 import net.thequester.archiver.ArchiverException;
 import net.thequester.archiver.QuestArchiver;
 import net.thequester.model.*;
+import net.thequester.model.Event.Event;
+import net.thequester.model.Game;
+import net.thequester.model.Node;
+import net.thequester.model.Quest;
+import net.thequester.model.QuestLocation;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -14,6 +19,7 @@ import java.util.List;
 public class QuestProcessor implements IQuestProcessor{
 
     private Quest quest;
+    private EventProcessor eventProcessor;
 	private Game game;
 
     public QuestProcessor(Quest quest, QuestArchive archive) {
@@ -103,4 +109,18 @@ public class QuestProcessor implements IQuestProcessor{
         return 6366000 * tt;
 	}
 
+    public Node processLocation(Node currentNode, QuestLocation location) {
+
+        Event event = quest.getEvents().get(currentNode.getId());
+        EventProcessor processor = new EventProcessor(event);
+
+        List<Node> children = getChildren(currentNode);
+
+        if(eventProcessor.isCauseFulfilled(game)){
+            eventProcessor.applyEffect(children);
+        }
+
+
+        return null;
+    }
 }

@@ -1,5 +1,7 @@
 package net.thequester.model;
 
+import net.thequester.model.Event.Event;
+
 import javax.xml.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,9 @@ public class Quest {
     @XmlElement(name = "node", type = Node.class)
     private List<Node> nodes;
 
-    Map<Integer,Connection> connections;
+    private Map<Integer,Connection> connections;
+
+    private Map<Integer, Event> events;
 
     public List<Node> getNodes() {
         return nodes;
@@ -33,4 +37,11 @@ public class Quest {
         this.connections = connections;
     }
 
+    public Map<Integer, Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Map<Integer, Event> events) {
+        this.events = events;
+    }
 }

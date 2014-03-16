@@ -1,5 +1,6 @@
 package net.thequester.processor;
 
+import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import org.junit.Before;
@@ -43,6 +44,8 @@ public class QuestProcessorTest {
 
 		assertEquals(2, children.size());
     }
+
+
 
 
 }
