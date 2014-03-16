@@ -1,10 +1,12 @@
-package net.thequester.processor;
+package net.thequester.processor.impl;
 
 import net.thequester.database.IGameProvider;
 import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
+import net.thequester.processor.IEventProcessor;
+import net.thequester.processor.IGameProcessor;
 import net.thequester.processor.impl.EventProcessor;
 import net.thequester.processor.impl.QuestProcessor;
 
@@ -16,7 +18,7 @@ import java.util.Map;
 /**
  * @author tdubravcevic
  */
-public class GameProcessor {
+public class GameProcessor implements IGameProcessor{
 
     private QuestProcessor questProcessor;
     private IGameProvider gameProvider;
@@ -32,10 +34,6 @@ public class GameProcessor {
         game = gameProvider.getGame(quest);
     }
 
-    /**
-     * processes the location and sets new current node
-     * @param location given by the locationClient
-     */
     public void processLocation(QuestLocation location) {
 
         Node node = questProcessor.processLocation(game.currentNode(), location);
