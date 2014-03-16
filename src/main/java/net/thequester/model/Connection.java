@@ -1,6 +1,7 @@
 package net.thequester.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,11 @@ public class Connection {
     private List<Integer> children;
     @XmlElement(name = "parent", type = Integer.class)
     private List<Integer> parents;
+
+    public Connection() {
+        children = new ArrayList<Integer>();
+        parents = new ArrayList<Integer>();
+    }
 
     public List<Integer> getChildren() {
         return children;

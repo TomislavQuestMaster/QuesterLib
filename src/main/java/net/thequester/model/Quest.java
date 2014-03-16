@@ -1,6 +1,8 @@
 package net.thequester.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +20,12 @@ public class Quest {
     private Map<Integer,Connection> connections;
 
     private Map<Integer, Event> events;
+
+    public Quest() {
+        this.nodes = new ArrayList<Node>();
+        this.connections = new HashMap<Integer, Connection>();
+        this.events = new HashMap<Integer, Event>();
+    }
 
     public List<Node> getNodes() {
         return nodes;

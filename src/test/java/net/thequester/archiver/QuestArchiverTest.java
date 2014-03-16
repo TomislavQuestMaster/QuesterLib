@@ -4,6 +4,7 @@ import net.thequester.model.Quest;
 import net.thequester.model.QuestArchive;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by Tomo.
  */
+@Ignore
 public class QuestArchiverTest {
 
     private QuestArchiver questArchiver;

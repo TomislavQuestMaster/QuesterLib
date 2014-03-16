@@ -1,12 +1,15 @@
 package net.thequester.model;
 
-import net.thequester.model.Node;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Map;
 
 /**
  * Created by Tomo.
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "event")
 public class Event {
 
     /**

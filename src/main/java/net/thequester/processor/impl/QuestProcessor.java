@@ -4,6 +4,7 @@ import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
 import net.thequester.processor.IQuestProcessor;
+import net.thequester.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +31,24 @@ public class QuestProcessor implements IQuestProcessor {
 				return node;
 			}
 		}
-
 		return null;
 	}
+
+    private List<Node> getVisitableLocations(Node node){
+
+        if(node == null){
+            List<Node> nodes = new ArrayList<Node>();
+            nodes.add(quest.getNodes().get(0));
+            return nodes;
+        }
+
+        return getChildren(node);
+    }
+
+    private boolean isNodeAtLocation(Node node, QuestLocation location){
+
+        return Utility.distanceInMeters(node.getQuestLocation(), location) <= node.getRadius();
+    }
 
     @Override
     public List<Node> getChildren(Node node){
@@ -57,36 +73,5 @@ public class QuestProcessor implements IQuestProcessor {
 
         return parents;
     }
-
-	private List<Node> getVisitableLocations(Node node){
-
-		if(node == null){
-			List<Node> nodes = new ArrayList<Node>();
-			nodes.add(quest.getNodes().get(0));
-			return nodes;
-		}
-
-		return getChildren(node);
-	}
-
-    boolean isNodeAtLocation(Node node, QuestLocation location){
-
-        return distanceInMeters(node.getQuestLocation(), location) <= node.getRadius();
-    }
-
-	private double distanceInMeters(QuestLocation to, QuestLocation from) {
-
-        double pk = 180 / Math.PI;
-
-        double a1 = to.getLatitude() * Math.PI / 180;
-        double a2 = to.getLongitude() * Math.PI / 180;
-        double b1 = from.getLatitude() * Math.PI / 180;
-        double b2 = from.getLongitude() * Math.PI / 180;
-
-        double t = Math.sin(a1)*Math.sin(b1) + Math.cos(a1)*Math.cos(b1)*Math.cos(a2 - b2);
-        double tt = Math.acos(t);
-
-        return 6366000 * tt;
-	}
 
 }

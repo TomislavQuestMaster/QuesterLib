@@ -1,5 +1,6 @@
 package net.thequester.model;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -18,6 +19,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author tdubravcevic
  */
+@Ignore
 public class ModelTest {
 
     @Test
