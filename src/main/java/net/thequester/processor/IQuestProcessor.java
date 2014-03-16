@@ -13,12 +13,13 @@ public interface IQuestProcessor {
 
 	/**
 	 * verifies if the new location is in any new node radius
+     * @param lastId last visited node
 	 * @param location new visited location
 	 * @return new questNode if one is discovered, null otherwise
 	 */
-	Node processLocation(QuestLocation location);
+     Node processLocation(Integer lastId, QuestLocation location);
 
-	/**
+    /**
 	 * @param node currently visited node
 	 * @return list of nodes you can go to from the current
 	 */
@@ -30,5 +31,4 @@ public interface IQuestProcessor {
 	 */
 	List<Node> getParents(Node node);
 
-	Game getGame();
 }

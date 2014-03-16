@@ -1,10 +1,9 @@
 package net.thequester.processor;
 
-import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
+import net.thequester.processor.impl.QuestProcessor;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;

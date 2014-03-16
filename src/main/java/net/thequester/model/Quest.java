@@ -1,7 +1,5 @@
 package net.thequester.model;
 
-import net.thequester.model.Event.Event;
-
 import javax.xml.bind.annotation.*;
 import java.util.List;
 import java.util.Map;

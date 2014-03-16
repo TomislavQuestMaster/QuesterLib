@@ -7,7 +7,7 @@ import net.thequester.model.Quest;
 import net.thequester.model.QuestArchive;
 import net.thequester.model.QuestLocation;
 import net.thequester.processor.IQuestProcessor;
-import net.thequester.processor.QuestProcessor;
+import net.thequester.processor.impl.QuestProcessor;
 import org.junit.Before;
 import org.junit.Test;
 

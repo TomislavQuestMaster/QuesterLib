@@ -1,8 +1,5 @@
 package net.thequester.model;
 
-import net.thequester.model.Event.State;
-
-import java.util.LinkedHashMap;
 import javax.xml.bind.annotation.*;
 import java.util.List;
 
@@ -13,35 +10,19 @@ import java.util.List;
 @XmlRootElement(name = "game")
 public class Game {
 
-    private Node currentNode;
-
 	@XmlElementWrapper(name = "visitedNodes")
-	@XmlElement(name = "node", type = Node.class)
-    private List<Node> visitedNodes;
+	@XmlElement(name = "node", type = Integer.class)
+    private List<Integer> visitedNodes;
 
-    private LinkedHashMap<Integer, State> visitedNodesMap;
-
-    public Node getCurrentNode() {
-        return currentNode;
-    }
-
-    public void setCurrentNode(Node currentNode) {
-        this.currentNode = currentNode;
-    }
-
-    public List<Node> getVisitedNodes() {
+    public List<Integer> getVisitedNodes() {
         return visitedNodes;
     }
 
-    public void setVisitedNodes(List<Node> visitedNodes) {
+    public void setVisitedNodes(List<Integer> visitedNodes) {
         this.visitedNodes = visitedNodes;
     }
 
-    public LinkedHashMap<Integer, State> getVisitedNodesMap() {
-        return visitedNodesMap;
-    }
-
-    public void setVisitedNodesMap(LinkedHashMap<Integer, State> visitedNodesMap) {
-        this.visitedNodesMap = visitedNodesMap;
+    public Integer currentNode() {
+        return visitedNodes.get(visitedNodes.size()-1);
     }
 }

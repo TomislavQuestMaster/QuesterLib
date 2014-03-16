@@ -1,46 +1,32 @@
-package net.thequester.processor;
+package net.thequester.processor.impl;
 
-import net.thequester.archiver.ArchiverException;
-import net.thequester.archiver.QuestArchiver;
-import net.thequester.model.*;
-import net.thequester.model.Event.Event;
-import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
+import net.thequester.processor.IQuestProcessor;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  * @author tdubravcevic
  */
-public class QuestProcessor implements IQuestProcessor{
+public class QuestProcessor implements IQuestProcessor {
 
     private Quest quest;
-    private EventProcessor eventProcessor;
-	private Game game;
 
-    public QuestProcessor(Quest quest, QuestArchive archive) {
+    public QuestProcessor(Quest quest) {
         this.quest = quest;
-		QuestArchiver archiver = new QuestArchiver(archive);
-		try {
-			this.game = archiver.loadGame("quest1");
-		} catch (ArchiverException e) {
-			this.game = new Game();
-			this.game.setVisitedNodes(new LinkedList<Node>());
-		}
 	}
 
 	@Override
-	public Node processLocation(QuestLocation location) {
+	public Node processLocation(Integer lastId, QuestLocation location) {
 
-		for(Node node : getVisitableLocations(game.getCurrentNode())){
+        Node currentNode = quest.getNodes().get(lastId);
+
+		for(Node node : getVisitableLocations(currentNode)){
 
 			if(isNodeAtLocation(node, location)){
-				game.setCurrentNode(node);
-				game.getVisitedNodes().add(node);
 				return node;
 			}
 		}
@@ -71,12 +57,6 @@ public class QuestProcessor implements IQuestProcessor{
 
         return parents;
     }
-
-	@Override
-	public Game getGame() {
-
-		return game;
-	}
 
 	private List<Node> getVisitableLocations(Node node){
 
@@ -109,18 +89,4 @@ public class QuestProcessor implements IQuestProcessor{
         return 6366000 * tt;
 	}
 
-    public Node processLocation(Node currentNode, QuestLocation location) {
-
-        Event event = quest.getEvents().get(currentNode.getId());
-        EventProcessor processor = new EventProcessor(event);
-
-        List<Node> children = getChildren(currentNode);
-
-        if(eventProcessor.isCauseFulfilled(game)){
-            eventProcessor.applyEffect(children);
-        }
-
-
-        return null;
-    }
 }
