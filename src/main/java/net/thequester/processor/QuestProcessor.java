@@ -1,5 +1,6 @@
 package net.thequester.processor;
 
+import net.thequester.model.Event.Event;
 import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
@@ -14,6 +15,7 @@ import java.util.List;
 public class QuestProcessor {
 
     private Quest quest;
+    private EventProcessor eventProcessor;
 
     public QuestProcessor(Quest quest) {
         this.quest = quest;
@@ -83,6 +85,18 @@ public class QuestProcessor {
     }
 
 
+    public Node processLocation(Node currentNode, QuestLocation location) {
+
+        Event event = quest.getEvents().get(currentNode.getId());
+        EventProcessor processor = new EventProcessor(event);
+
+        List<Node> children = getChildren(currentNode);
+
+        if(eventProcessor.isCauseFulfilled(game)){
+            eventProcessor.applyEffect(children);
+        }
 
 
+        return null;
+    }
 }

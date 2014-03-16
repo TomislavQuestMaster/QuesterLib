@@ -1,5 +1,6 @@
 package net.thequester.processor;
 
+import net.thequester.database.IGameProvider;
 import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
@@ -12,32 +13,27 @@ import java.util.List;
  */
 public class GameProcessor {
 
-    private Game game;
     private QuestProcessor questProcessor;
+    private IGameProvider gameProvider;
+
+    private Game game;
+
+    /**
+     * processes the location and sets new current node
+     * @param location given by the locationClient
+     */
+    public void processLocation(QuestLocation location){
+
+        Node node = questProcessor.processLocation(game.getCurrentNode(), location);
+        if(node!=null){
+            game.setCurrentNode(node);
+        }
+    }
 
     public void startQuest(Quest quest){
 
         questProcessor = new QuestProcessor(quest);
-        game = new Game();
-        //TODO who loads the game
-    }
-
-    /**
-     * goes trough visitable nodes and sets new current node
-     * @param location given by the locationClient
-     * @return true if a child of the current node is at location, false otherwise
-     */
-    public boolean checkLocation(QuestLocation location){
-
-        for(Node child : questProcessor.getChildren(game.getCurrentNode())){
-
-            if(questProcessor.isNodeAtLocation(child,location)){
-                 game.setCurrentNode(child);
-                    return true;
-            }
-        }
-
-        return false;
+        game = gameProvider.getGame(quest);
     }
 
     public List<Node> getVisitedNodes(){
