@@ -5,7 +5,7 @@ import net.thequester.model.QuestLocation;
 /**
  * Created by Tomo.
  */
-public interface IGameProcessor {
+public interface IGameEngine {
 
     /**
      * processes the location and sets new current node
