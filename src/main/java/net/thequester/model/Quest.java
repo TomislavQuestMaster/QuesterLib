@@ -15,13 +15,7 @@ import java.util.Map;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "quest")
-@Entity
-@Table(name="quests")
 public class Quest {
-
-    @Id
-    @GeneratedValue
-    private Long id;
 
     @XmlElementWrapper(name = "nodes")
     @XmlElement(name = "node", type = Node.class)
@@ -35,14 +29,6 @@ public class Quest {
         this.nodes = new ArrayList<Node>();
         this.connections = new HashMap<Integer, Connection>();
         this.events = new HashMap<Integer, Event>();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public List<Node> getNodes() {
