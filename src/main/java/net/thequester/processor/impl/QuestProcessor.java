@@ -23,7 +23,7 @@ public class QuestProcessor implements IQuestProcessor {
 	@Override
 	public Node processLocation(Integer lastId, QuestLocation location) {
 
-        Node currentNode = quest.getNodes().get(lastId);
+        Node currentNode = getNodeById(lastId);
 
 		for(Node node : getVisitableLocations(currentNode)){
 
@@ -33,6 +33,16 @@ public class QuestProcessor implements IQuestProcessor {
 		}
 		return null;
 	}
+
+    private Node getNodeById(int id){
+
+        for(Node node : quest.getNodes()){
+            if(node.getId() == id){
+                return node;
+            }
+        }
+        return null;
+    }
 
     private List<Node> getVisitableLocations(Node node){
 
@@ -56,7 +66,7 @@ public class QuestProcessor implements IQuestProcessor {
         List<Node> children = new ArrayList<Node>();
 
         for(Integer nodeId : quest.getConnections().get(node.getId()).getChildren()){
-             children.add(quest.getNodes().get(nodeId));
+             children.add(getNodeById(nodeId));
         }
 
         return children;

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<quest>
+    <id>123</id>
+    <nodes>
+        <node>
+            <id>2</id>
+            <questLocation>
+                <latitude>42.64159093976373</latitude>
+                <longitude>18.10746431350708</longitude>
+            </questLocation>
+            <radius>50.0</radius>
+        </node>
+        <node>
+            <id>3</id>
+            <questLocation>
+                <latitude>42.64103059165477</latitude>
+                <longitude>18.110125064849854</longitude>
+            </questLocation>
+            <radius>50.0</radius>
+        </node>
+    </nodes>
+    <connections>
+        <entry>
+            <key>2</key>
+            <value>
+                <child>3</child>
+            </value>
+        </entry>
+        <entry>
+            <key>3</key>
+            <value>
+                <parent>2</parent>
+            </value>
+        </entry>
+    </connections>
+    <events/>
+</quest>
