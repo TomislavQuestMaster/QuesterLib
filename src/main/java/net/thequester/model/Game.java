@@ -1,6 +1,7 @@
 package net.thequester.model;
 
 import javax.xml.bind.annotation.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,6 +14,10 @@ public class Game {
 	@XmlElementWrapper(name = "visitedNodes")
 	@XmlElement(name = "node", type = Integer.class)
     private List<Integer> visitedNodes;
+
+    public Game(){
+        this.visitedNodes = new ArrayList<Integer>();
+    }
 
     public List<Integer> getVisitedNodes() {
         return visitedNodes;

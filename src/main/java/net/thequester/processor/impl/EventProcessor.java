@@ -18,8 +18,11 @@ public class EventProcessor implements IEventProcessor{
         this.events = quest.getEvents();
     }
 
-    @Override
     public boolean isCauseFulfilled(Integer newNode, Map<Integer, Integer> nodeStates){
+
+        if(events.size() == 0){
+            return true;
+        }
 
         Event event = events.get(newNode);
 

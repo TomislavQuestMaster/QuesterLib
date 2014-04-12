@@ -11,10 +11,7 @@ import net.thequester.processor.IGameEngine;
 import net.thequester.processor.impl.EventProcessor;
 import net.thequester.processor.impl.QuestProcessor;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author tdubravcevic
@@ -32,7 +29,9 @@ public class GameEngine implements IGameEngine {
         questProcessor = new QuestProcessor(quest);
         eventProcessor = new EventProcessor(quest);
         //autowire elements
-        game = gameProvider.getGame(quest);
+        //game = gameProvider.getGame(quest);
+        game = new Game();
+        game.getVisitedNodes().add(quest.getNodes().get(0).getId());
     }
 
     public void processLocation(QuestLocation location) {
