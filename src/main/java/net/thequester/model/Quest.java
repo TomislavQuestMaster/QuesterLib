@@ -13,6 +13,8 @@ import java.util.Map;
 @XmlRootElement(name = "quest")
 public class Quest {
 
+    private Integer id;
+
     @XmlElementWrapper(name = "nodes")
     @XmlElement(name = "node", type = Node.class)
     private List<Node> nodes;
@@ -49,5 +51,13 @@ public class Quest {
 
     public void setEvents(Map<Integer, Event> events) {
         this.events = events;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
