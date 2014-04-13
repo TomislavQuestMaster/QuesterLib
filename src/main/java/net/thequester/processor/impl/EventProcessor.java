@@ -26,9 +26,18 @@ public class EventProcessor implements IEventProcessor{
 
         Event event = events.get(newNode);
 
+        if(event == null){
+            return true;
+        }
+
         for(Entry<Integer, Integer> cause : event.getCauses().entrySet()){
 
-            if(!cause.getValue().equals(nodeStates.get(cause.getKey()))){
+            Integer visited = nodeStates.get(cause.getKey());
+            if(visited == null){
+                visited = 0;
+            }
+
+            if(!cause.getValue().equals(visited)){
                 return false;
             }
         }
