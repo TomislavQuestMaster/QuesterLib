@@ -22,6 +22,10 @@ public class Event {
         causes = new HashMap<Integer, Integer>();
     }
 
+	private Event(Map<Integer, Integer> causes) {
+		this.causes = causes;
+	}
+
     public Map<Integer, Integer> getCauses() {
         return causes;
     }
@@ -30,4 +34,24 @@ public class Event {
         this.causes = causes;
     }
 
+
+	public static class EventBuilder{
+
+		private Map<Integer,Integer> causes;
+
+		public EventBuilder(){
+			causes = new HashMap<Integer, Integer>();
+		}
+
+		public EventBuilder cause(Integer visited, Integer times){
+
+			causes.put(visited, times);
+			return this;
+		}
+
+		public Event build(){
+			return new Event(causes);
+		}
+
+	}
 }

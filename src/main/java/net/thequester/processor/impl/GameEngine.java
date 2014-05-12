@@ -24,10 +24,17 @@ public class GameEngine implements IGameEngine {
 
     private Game game;
 
-    public void startQuest(Quest quest) {
+	public GameEngine(QuestProcessor questProcessor, IEventProcessor eventProcessor) {
+
+		this.questProcessor = questProcessor;
+		this.eventProcessor = eventProcessor;
+		this.game = new Game();
+	}
+
+	public void startQuest(Quest quest) {
 
         questProcessor = new QuestProcessor(quest);
-        eventProcessor = new EventProcessor(quest);
+        eventProcessor = new EventProcessor(quest.getEvents());
         //autowire elements
         //game = gameProvider.getGame(quest);
         game = new Game();

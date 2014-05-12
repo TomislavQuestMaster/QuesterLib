@@ -28,6 +28,11 @@ public class Game {
     }
 
     public Integer currentNode() {
+
+		if(visitedNodes.isEmpty()){
+			return null;
+		}
+
         return visitedNodes.get(visitedNodes.size()-1);
     }
 }
