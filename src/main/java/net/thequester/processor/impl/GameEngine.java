@@ -1,15 +1,11 @@
 package net.thequester.processor.impl;
 
-import net.thequester.database.IGameProvider;
 import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
 import net.thequester.processor.IEventProcessor;
 import net.thequester.processor.IGameEngine;
-import net.thequester.processor.IGameEngine;
-import net.thequester.processor.impl.EventProcessor;
-import net.thequester.processor.impl.QuestProcessor;
 
 import java.util.*;
 
@@ -19,7 +15,6 @@ import java.util.*;
 public class GameEngine implements IGameEngine {
 
     private QuestProcessor questProcessor;
-    private IGameProvider gameProvider;
     private IEventProcessor eventProcessor;
 
     private Game game;
