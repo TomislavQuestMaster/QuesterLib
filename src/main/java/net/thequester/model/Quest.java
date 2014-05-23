@@ -24,9 +24,9 @@ public class Quest {
     private Map<Integer, Event> events;
 
     public Quest() {
-        this.nodes = new ArrayList<Node>();
-        this.connections = new HashMap<Integer, Connection>();
-        this.events = new HashMap<Integer, Event>();
+        this.nodes = new ArrayList<>();
+        this.connections = new HashMap<>();
+        this.events = new HashMap<>();
     }
 
     public List<Node> getNodes() {
