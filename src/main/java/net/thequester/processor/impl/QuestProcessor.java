@@ -1,5 +1,6 @@
 package net.thequester.processor.impl;
 
+import com.google.common.base.Optional;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
@@ -21,17 +22,17 @@ public class QuestProcessor implements IQuestProcessor {
 	}
 
 	@Override
-	public Node processLocation(Integer lastId, QuestLocation location) {
+	public Optional<Node> processLocation(Integer lastId, QuestLocation location) {
 
         Node currentNode = getNodeById(lastId);
 
 		for(Node node : getVisitableLocations(currentNode)){
 
 			if(isNodeAtLocation(node, location)){
-				return node;
+				return Optional.of(node);
 			}
 		}
-		return null;
+		return Optional.absent();
 	}
 
     private Node getNodeById(int id){

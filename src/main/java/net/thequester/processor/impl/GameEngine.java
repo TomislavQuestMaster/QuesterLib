@@ -1,5 +1,6 @@
 package net.thequester.processor.impl;
 
+import com.google.common.base.Optional;
 import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
@@ -38,10 +39,11 @@ public class GameEngine implements IGameEngine {
 
     public void processLocation(QuestLocation location) {
 
-        Node node = questProcessor.processLocation(game.currentNode(), location);
-        if (node == null) {
+        Optional<Node> nodeOptional = questProcessor.processLocation(game.currentNode(), location);
+        if (!nodeOptional.isPresent()) {
             return;
         }
+		Node node = nodeOptional.get();
 
         if(!eventProcessor.isCauseFulfilled(node.getId(), getNodeStates())){
             return;
