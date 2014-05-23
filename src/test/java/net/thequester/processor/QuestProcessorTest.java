@@ -59,11 +59,11 @@ public class QuestProcessorTest {
         int lastId = quest.getNodes().get(0).getId();
         QuestLocation location = quest.getNodes().get(0).getQuestLocation();
 
-        Node node = questProcessor.processLocation(lastId, location);
+        Node node = questProcessor.processLocation(lastId, location).get();
         assertEquals(null, node);
 
         location = quest.getNodes().get(1).getQuestLocation();
-        node = questProcessor.processLocation(lastId, location);
+        node = questProcessor.processLocation(lastId, location).get();
         assertEquals(node.getId(), Integer.valueOf(3));
     }
 

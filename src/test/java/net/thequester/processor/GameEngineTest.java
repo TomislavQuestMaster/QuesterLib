@@ -1,5 +1,6 @@
 package net.thequester.processor;
 
+import com.google.common.base.Optional;
 import net.thequester.model.Node;
 import net.thequester.model.QuestLocation;
 import net.thequester.processor.impl.EventProcessor;
@@ -76,7 +77,7 @@ public class GameEngineTest {
 	private void givenNodeFromProcessor(Integer id){
 		Node node = new Node();
 		node.setId(id);
-		when(questProcessor.processLocation(currentNode, location)).thenReturn(node);
+		when(questProcessor.processLocation(currentNode, location)).thenReturn(Optional.of(node));
 	}
 
 	private void givenSuccessfulEvent() {

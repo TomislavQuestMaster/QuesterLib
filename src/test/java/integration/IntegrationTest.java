@@ -47,7 +47,7 @@ public class IntegrationTest {
 
 		for(QuestLocation location : expectedPath.keySet()){
 
-			Node node = processor.processLocation(1, location);
+			Node node = processor.processLocation(1, location).get();
 			assertEquals(expectedPath.get(location), node);
 		}
 
