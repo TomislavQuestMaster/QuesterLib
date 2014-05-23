@@ -1,6 +1,5 @@
 package net.thequester.processor.impl;
 
-import com.google.common.base.Optional;
 import net.thequester.model.Game;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
@@ -53,7 +52,7 @@ public class GameEngine implements IGameEngine {
     }
 
     private Map<Integer, Integer> getNodeStates() {
-        Map<Integer, Integer> states = new HashMap<Integer, Integer>();
+        Map<Integer, Integer> states = new HashMap<>();
 
         List<Integer> visited = game.getVisitedNodes();
 
@@ -65,7 +64,7 @@ public class GameEngine implements IGameEngine {
     }
 
     public List<Integer> getGamePath() {
-        //return node aspects
+        //TODO return node aspects
         return game.getVisitedNodes();
     }
 

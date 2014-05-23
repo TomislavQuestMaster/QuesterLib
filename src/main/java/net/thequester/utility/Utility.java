@@ -2,45 +2,20 @@ package net.thequester.utility;
 
 import net.thequester.model.QuestLocation;
 
-import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import static java.lang.Math.*;
 
 /**
  * @author tdubravcevic
  */
 public class Utility {
 
-    public static Connection getLocalConnection(PrintWriter out){
+	public static double distanceInMeters(QuestLocation to, QuestLocation from) {
 
-        try {
-            Class.forName("com.mysql.jdbc.Driver").newInstance();
-        }
-        catch(Exception e) {
-            out.println("Exception: " + e.getMessage());
-            return null;
-        }
+		double toLat = to.getLatitude();
+		double toLon = to.getLongitude();
+		double fromLat = from.getLatitude();
+		double fromLon = from.getLongitude();
 
-        try {
-            return DriverManager.getConnection("jdbc:mysql://localhost:3306/quester", "root", "root");
-
-        } catch(Exception e) {
-            //TODO throw exception
-            out.println("Exception: " + e.getMessage());
-            return null;
-        }
-    }
-
-    public static double distanceInMeters(QuestLocation to, QuestLocation from) {
-
-        double a1 = to.getLatitude() * Math.PI / 180;
-        double a2 = to.getLongitude() * Math.PI / 180;
-        double b1 = from.getLatitude() * Math.PI / 180;
-        double b2 = from.getLongitude() * Math.PI / 180;
-
-        double t = Math.sin(a1)*Math.sin(b1) + Math.cos(a1)*Math.cos(b1)*Math.cos(a2 - b2);
-        double tt = Math.acos(t);
-
-        return 6366000 * tt;
-    }
+		return 6373000 * acos((sin(toLat) * sin(fromLat)) + (cos(toLat) * cos(fromLat) * cos(toLon - fromLon)));
+	}
 }

@@ -1,6 +1,5 @@
 package net.thequester.processor;
 
-import com.google.common.base.Optional;
 import net.thequester.model.Node;
 import net.thequester.model.QuestLocation;
 import net.thequester.processor.impl.EventProcessor;
@@ -10,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.Optional;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

@@ -1,6 +1,5 @@
 package net.thequester.processor.impl;
 
-import com.google.common.base.Optional;
 import net.thequester.model.Node;
 import net.thequester.model.Quest;
 import net.thequester.model.QuestLocation;
@@ -9,6 +8,7 @@ import net.thequester.utility.Utility;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author tdubravcevic
@@ -32,7 +32,7 @@ public class QuestProcessor implements IQuestProcessor {
 				return Optional.of(node);
 			}
 		}
-		return Optional.absent();
+		return Optional.empty();
 	}
 
     private Node getNodeById(int id){
@@ -48,7 +48,7 @@ public class QuestProcessor implements IQuestProcessor {
     private List<Node> getVisitableLocations(Node node){
 
         if(node == null){
-            List<Node> nodes = new ArrayList<Node>();
+            List<Node> nodes = new ArrayList<>();
             nodes.add(quest.getNodes().get(0));
             return nodes;
         }
@@ -64,7 +64,7 @@ public class QuestProcessor implements IQuestProcessor {
     @Override
     public List<Node> getChildren(Node node){
 
-        List<Node> children = new ArrayList<Node>();
+        List<Node> children = new ArrayList<>();
 
         for(Integer nodeId : quest.getConnections().get(node.getId()).getChildren()){
              children.add(getNodeById(nodeId));
@@ -76,7 +76,7 @@ public class QuestProcessor implements IQuestProcessor {
     @Override
     public List<Node> getParents(Node node){
 
-        List<Node> parents = new ArrayList<Node>();
+        List<Node> parents = new ArrayList<>();
 
         for(Integer nodeId : quest.getConnections().get(node.getId()).getParents()){
             parents.add(quest.getNodes().get(nodeId));
